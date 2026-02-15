@@ -30,7 +30,12 @@ echo "Using YubiKey with serial: $SERIAL"
 # -----------------------------
 # Detect resident SSH credential on this key
 # -----------------------------
-SSH_CRED_ID=$(ykman -d "$SERIAL" fido credentials list 2>/dev/null | awk '/^ssh:/ {print $1}' | head -n1)
+SSH_CRED_ID=$(ykman -d "$SERIAL" fido credentials list 2>/dev/null | \
+    tail -n +2 | \
+    awk '$2 == "ssh:" {print $1}' | head -n1)
+
+# Strip trailing dots from truncated Credential ID
+SSH_CRED_ID=${SSH_CRED_ID%%...}
 
 if [ -z "$SSH_CRED_ID" ]; then
     echo "No resident SSH key found on this YubiKey."
@@ -56,6 +61,8 @@ PUB_HANDLE="$PRIV_HANDLE.pub"
 if [ ! -f "$PRIV_HANDLE" ]; then
     echo "Generating handle for $HUMAN_NAME..."
     ssh-keygen -K -f "$PRIV_HANDLE"
+    mv id_ed25519_sk_rk "$PRIV_HANDLE"
+    mv id_ed25519_sk_rk.pub "$PUB_HANDLE"
 else
     echo "Handle already exists: $PRIV_HANDLE"
 fi
