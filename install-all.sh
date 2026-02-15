@@ -6,4 +6,7 @@
 ./install-yubikey-sshkey.sh
 ./install-stow.sh
 ./install-dotfiles.sh
+./install-bitwarden.sh
+./install-keymapp.sh
+./install-anytype.sh
 
