@@ -11,8 +11,8 @@ HANDLE_DIR="$HOME/.ssh"
 # Map Credential IDs to human-readable names
 declare -A CRED_MAP=(
     ["6edffc4d"]="yubikey-5c-backup-resident"
-    ["7c2dd26e"]="yubikey-5c-main-resident"
-    ["9796a1a6"]="yubikey-nano-resident"
+    ["0c88585e"]="yubikey-5c-main-resident"
+    ["041deddc"]="yubikey-nano-resident"
 )
 
 # -----------------------------
