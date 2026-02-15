@@ -35,8 +35,10 @@ if [ "$CLONED" = true ] || [ -d "$REPO_NAME/.git" ]; then
 
   echo "removing old configs"
   #rm -rf ~/.config/nvim ~/.config/starship.toml ~/.local/share/nvim/ ~/.cache/nvim/ ~/.config/ghostty/config
+  rm -rf ~/.config/git/config
 
-  cd "$REPO_NAME"
+  stow bash
+  stow git
   #stow zshrc
   #stow ghostty
   #stow tmux
