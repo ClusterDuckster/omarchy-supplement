@@ -72,9 +72,11 @@ fi
 # -----------------------------
 if [ ! -d "$DOTFILES_DIR" ]; then
     echo "Cloning dotfiles using handle $PRIV_HANDLE..."
-    GIT_SSH_COMMAND="ssh -i $PRIV_HANDLE -o IdentitiesOnly=yes" \
+    GIT_SSH_COMMAND="ssh -i $PRIV_HANDLE -o IdentitiesOnly=yes -o IdentityAgent=none" \
     git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
 else
-    echo "Dotfiles directory already exists, skipping clone."
+    echo "Dotfiles directory already exists, pulling newest changes."
+    GIT_SSH_COMMAND="ssh -i $PRIV_HANDLE -o IdentitiesOnly=yes -o IdentityAgent=none" \
+    git -C "$DOTFILES_DIR" pull
 fi
 
