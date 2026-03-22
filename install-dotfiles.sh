@@ -39,6 +39,7 @@ if [ "$CLONED" = true ] || [ -d "$REPO_NAME/.git" ]; then
 
   stow bash
   stow git
+  stow ssh
   #stow zshrc
   #stow ghostty
   #stow tmux
