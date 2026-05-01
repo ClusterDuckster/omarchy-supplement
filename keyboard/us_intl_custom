@@ -4,8 +4,8 @@ xkb_symbols "intl_custom" {
     include "us(basic)"
     include "level3(ralt_switch)"
     name[Group1]= "English (US Intl Custom)";
-    key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
-    key <AC05> { [ s, S, ssharp, ssharp ] };
-    key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
-    key <AD12> { [ p, P, odiaeresis, Odiaeresis ] };
+    key <AD01> { [ q, Q, adiaeresis, Adiaeresis ] };
+    key <AC02> { [ s, S, ssharp, ssharp ] };
+    key <AD06> { [ y, Y, udiaeresis, Udiaeresis ] };
+    key <AD10> { [ p, P, odiaeresis, Odiaeresis ] };
 };

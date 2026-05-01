@@ -35,16 +35,21 @@ if [ "$CLONED" = true ] || [ -d "$REPO_NAME/.git" ]; then
 
   echo "removing old configs"
   #rm -rf ~/.config/nvim ~/.config/starship.toml ~/.local/share/nvim/ ~/.cache/nvim/ ~/.config/ghostty/config
-  rm -rf ~/.config/git/config
+  rm -rf ~/.config/git/config ~/.config/waybar
+  rm -rf ~/.config/hypr/bindings.conf ~/.config/hypr/input.conf
 
   stow bash
   stow git
   stow ssh
+  stow waybar
+  stow hyprland
   #stow zshrc
   #stow ghostty
   #stow tmux
   #stow nvim
   #stow starship
+
+  hyprctl reload
 else
   echo "Failed to clone the repository."
   exit 1

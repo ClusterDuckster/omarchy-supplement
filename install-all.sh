@@ -11,5 +11,6 @@
 ./install-wireguard.sh
 ./install-zen-browser.sh
 ./install-keymapp.sh
+./install-signal.sh
 ./install-anytype.sh
-
+./patch-waybar.sh
