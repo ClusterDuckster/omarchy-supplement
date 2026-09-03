@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
-# Install DNS utilities (nslookup, dig)
+#!/bin/sh
 
-yay -S --noconfirm --needed bind
+# nslookup, dig
+omarchy pkg add bind

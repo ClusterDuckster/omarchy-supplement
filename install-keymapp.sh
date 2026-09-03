@@ -1,5 +1,4 @@
 #!/bin/sh
 
-# Install ZSA keymapp tool, for interactivity with my ZSA voyager keyboard
-yay -S --noconfirm zsa-keymapp-bin
-
+# ZSA keymapp, for flashing and live-training the ZSA Voyager keyboard
+omarchy pkg aur add zsa-keymapp-bin

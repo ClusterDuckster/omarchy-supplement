@@ -1,7 +1,3 @@
 #!/bin/sh
 
-# install zen-browser from AUR
-yay -S --noconfirm zen-browser-bin
-
-# TODO: what are the zen-browser-xxx extension AUR packages about?
-
+omarchy pkg aur add zen-browser-bin

@@ -33,23 +33,29 @@ if [ "$CLONED" = true ] || [ -d "$REPO_NAME/.git" ]; then
     git remote set-url --push origin "$REPO_URL_PUSH"
   fi
 
-  echo "removing old configs"
-  #rm -rf ~/.config/nvim ~/.config/starship.toml ~/.local/share/nvim/ ~/.cache/nvim/ ~/.config/ghostty/config
-  rm -rf ~/.config/git/config ~/.config/waybar
-  rm -rf ~/.config/hypr/bindings.conf ~/.config/hypr/input.conf
+  echo "removing conflicting configs"
+  # Stow cannot symlink over existing regular files. Omarchy 4 creates these
+  # as plain files, and the defaults are regenerable via `omarchy refresh`.
+  for f in ~/.config/git/config \
+           ~/.config/hypr/input.lua \
+           ~/.config/hypr/bindings.lua \
+           ~/.config/xkb/symbols/us_intl_custom; do
+    [ -f "$f" ] && [ ! -L "$f" ] && rm -f "$f"
+  done
+  # The VPN plugin dir is fine to replace unless it is already our symlink.
+  if [ -d ~/.config/omarchy/plugins/olli.wireguard ] && [ ! -L ~/.config/omarchy/plugins/olli.wireguard ]; then
+    rm -rf ~/.config/omarchy/plugins/olli.wireguard
+  fi
 
   stow bash
   stow git
   stow ssh
-  stow waybar
   stow hyprland
-  #stow zshrc
-  #stow ghostty
-  #stow tmux
-  #stow nvim
-  #stow starship
+  stow xkb
+  stow omarchy
 
   hyprctl reload
+  omarchy-shell shell rescanPlugins
 else
   echo "Failed to clone the repository."
   exit 1

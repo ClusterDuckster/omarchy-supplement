@@ -1,5 +1,3 @@
 #!/bin/sh
 
-# Install anytype from AUR
-yay -S --noconfirm anytype-bin
-
+omarchy pkg aur add anytype-bin

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Install all packages in order
+cd "$(dirname "$0")"
+
+# Install everything in order
 ./bashrc-folder-loader.sh
 ./install-locale.sh
 ./install-yubikey.sh
@@ -9,8 +11,8 @@
 ./install-dotfiles.sh
 ./install-bitwarden.sh
 ./install-wireguard.sh
+./install-vpn-widget.sh
 ./install-zen-browser.sh
 ./install-keymapp.sh
-./install-signal.sh
 ./install-anytype.sh
-./patch-waybar.sh
+./install-dns-utils.sh

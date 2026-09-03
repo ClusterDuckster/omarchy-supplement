@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# install middleware library to communicate with FIDO device over USB
-yay -S --noconfirm --needed libfido2
-
-# install yubikey-manager for e.g. setting or changing FIDO2 PIN
-yay -S --noconfirm --needed yubikey-manager
-
+# libfido2: middleware to talk to FIDO devices over USB
+# yubikey-manager: e.g. setting or changing the FIDO2 PIN
+omarchy pkg add libfido2 yubikey-manager
