@@ -1,5 +1,5 @@
 #!/bin/sh
 
-# libfido2: middleware to talk to FIDO devices over USB
-# yubikey-manager: e.g. setting or changing the FIDO2 PIN
-omarchy pkg add libfido2 yubikey-manager
+# yubikey-manager: ykman CLI, e.g. setting or changing the FIDO2 PIN
+# libfido2/pam-u2f are installed by `omarchy setup security fido2`
+omarchy pkg add yubikey-manager

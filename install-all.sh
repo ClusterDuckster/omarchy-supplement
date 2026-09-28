@@ -10,9 +10,11 @@ cd "$(dirname "$0")"
 ./install-stow.sh
 ./install-dotfiles.sh
 ./install-bitwarden.sh
+./install-dns-utils.sh
 ./install-wireguard.sh
 ./install-vpn-widget.sh
 ./install-zen-browser.sh
 ./install-keymapp.sh
+./install-podman.sh
+./install-signal.sh
 ./install-anytype.sh
-./install-dns-utils.sh

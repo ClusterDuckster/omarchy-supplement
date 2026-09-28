@@ -36,23 +36,18 @@ if [ "$CLONED" = true ] || [ -d "$REPO_NAME/.git" ]; then
   echo "removing conflicting configs"
   # Stow cannot symlink over existing regular files. Omarchy 4 creates these
   # as plain files, and the defaults are regenerable via `omarchy refresh`.
-  for f in ~/.config/git/config \
+  for f in ~/.gitconfig \
            ~/.config/hypr/input.lua \
            ~/.config/hypr/bindings.lua \
            ~/.config/xkb/symbols/us_intl_custom; do
     [ -f "$f" ] && [ ! -L "$f" ] && rm -f "$f"
   done
-  # The VPN plugin dir is fine to replace unless it is already our symlink.
-  if [ -d ~/.config/omarchy/plugins/olli.wireguard ] && [ ! -L ~/.config/omarchy/plugins/olli.wireguard ]; then
-    rm -rf ~/.config/omarchy/plugins/olli.wireguard
-  fi
 
   stow bash
   stow git
   stow ssh
   stow hyprland
   stow xkb
-  stow omarchy
 
   hyprctl reload
   omarchy-shell shell rescanPlugins
