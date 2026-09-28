@@ -36,10 +36,18 @@ if [ "$CLONED" = true ] || [ -d "$REPO_NAME/.git" ]; then
   echo "removing conflicting configs"
   # Stow cannot symlink over existing regular files. Omarchy 4 creates these
   # as plain files, and the defaults are regenerable via `omarchy refresh`.
+  # Never remove a path that already resolves into this repo: a folded stow
+  # symlink (e.g. ~/.config/xkb -> ../dotfiles/xkb/.config/xkb) makes its
+  # targets look like plain files here, and the rm would delete the source
+  # it is meant to link to.
   for f in ~/.gitconfig \
            ~/.config/hypr/input.lua \
            ~/.config/hypr/bindings.lua \
            ~/.config/xkb/symbols/us_intl_custom; do
+    [ -e "$f" ] || continue
+    case "$(readlink -f "$f")" in
+      "$HOME/$REPO_NAME"/*) continue ;;
+    esac
     [ -f "$f" ] && [ ! -L "$f" ] && rm -f "$f"
   done
 
