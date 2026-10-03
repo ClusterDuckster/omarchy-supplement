@@ -51,28 +51,16 @@ if [ "$CLONED" = true ] || [ -d "$REPO_NAME/.git" ]; then
     [ -f "$f" ] && [ ! -L "$f" ] && rm -f "$f"
   done
 
-  # Neovim: omarchy-nvim seeds ~/.config/nvim from skel, so replace it with the
-  # stowed dotfiles copy. rm -rf does not follow symlinks, so a previously
-  # stowed tree is safe to clear.
-  nvim_cfg="$HOME/.config/nvim"
-  if [ -L "$nvim_cfg" ]; then
-    rm -f "$nvim_cfg"
-  elif [ -d "$nvim_cfg" ]; then
-    rm -rf "$nvim_cfg"
-  fi
-
+  # Neovim: only personal plugin files are stowed; Omarchy keeps owning the
+  # rest of ~/.config/nvim (including its generated lua/plugins/theme.lua).
+  # --no-folding keeps lua/plugins a real directory so the stowed files sit
+  # next to Omarchy's instead of replacing the whole directory.
   stow bash
   stow git
   stow ssh
   stow hyprland
   stow xkb
-  # --no-folding keeps real directories so Omarchy's generated
-  # lua/plugins/theme.lua can sit next to the stowed files.
   stow --no-folding nvim
-
-  # theme.lua is runtime state Omarchy regenerates on theme change, not tracked.
-  ln -sfn ../../../../.local/state/omarchy/current/theme/neovim.lua \
-    "$nvim_cfg/lua/plugins/theme.lua"
 
   hyprctl reload
   omarchy-shell shell rescanPlugins
